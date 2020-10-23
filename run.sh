@@ -26,7 +26,7 @@ if [ -z "${NODEPS}" ]; then
     sudo apt-get install -y jq byobu git
     sudo apt-get install -y nfs-common
     pip install -qU pip
-    pip install -r https://raw.githubusercontent.com/omare13/alberti-template/master/requirements.txt
+    pip install -r https://raw.githubusercontent.com/omare13/alberti-template/main/requirements.txt
     wandb login
 fi
 
@@ -48,16 +48,16 @@ else
     mkdir -p models
 fi
 
-curl -o shutdown.sh -q https://raw.githubusercontent.com/omare13/alberti-template/master/shutdown.sh
+curl -o shutdown.sh -q https://raw.githubusercontent.com/omare13/alberti-template/main/shutdown.sh
 chmod +x shutdown.sh
 
 if [ -n "${SCRIPT}" ]; then
     case "${SCRIPT}" in
     stanzas)
         say @b"Downloading stanzas-evaluation scripts" @reset
-        curl -o clean-checkpoints.sh -q https://raw.githubusercontent.com/omare13/alberti-template/master/clean-checkpoints.sh
+        curl -o clean-checkpoints.sh -q https://raw.githubusercontent.com/omare13/alberti-template/main/clean-checkpoints.sh
         chmod +x clean-checkpoints.sh
-        curl -o stanzas-evaluation.py -q https://raw.githubusercontent.com/omare13/alberti-template/master/stanzas-evaluation.py
+        curl -o stanzas-evaluation.py -q https://raw.githubusercontent.com/omare13/alberti-template/main/stanzas-evaluation.py
         chmod +x stanzas-evaluation.py
         byobu new-session -d -s "alberti" "watch -n 1 nvidia-smi"
         byobu new-window -t "alberti" "TAG=${TAG} MODELNAME=\"${ST_MODELNAME}\" OVERWRITE=${ST_OVERWRITE} python -W ignore stanzas-evaluation.py 2>&1 | tee -a \"runs/$(date +\"%Y-%m-%dT%H%M%S\").log\""

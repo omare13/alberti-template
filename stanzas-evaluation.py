@@ -59,8 +59,8 @@ def prepare_data():
         .assign(
             # Apply clean text over the text
             # Apply clean labels over stanza
-            text=lambda x: x["text"].apply(clean_text(x)),
-            stanza=lambda x: x["stanza"].apply(clean_labels(x)),
+            text=lambda x: x["text"].apply(clean_text),
+            stanza=lambda x: x["stanza"].apply(clean_labels),
         )
     )
     label_encoder = LabelEncoder()
